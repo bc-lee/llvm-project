@@ -51,7 +51,7 @@ int x = foo();
 
 //        RUN: rm -rf %t.dir && mkdir -p %t.dir
 //        RUN: cp %s %t.cpp
-//        RUN: echo "[{\"directory\":\"%t.dir\",\"file\":\"../%{t:stem}.tmp.cpp\",\"command\":\":clang++ -I%S/Inputs/ ../%{t:stem}.tmp.cpp\"}]" > %t.dir/compile_commands.json
+//        RUN: echo "[{\"directory\":\"%t.dir\",\"file\":\"../%{t:stem}.tmp.cpp\",\"command\":\":clang++ -I%S/Inputs/ ../%{t:stem}.tmp.cpp\"}]" | sed -e 's/\\/\\\\/g' > %t.dir/compile_commands.json
 //        RUN: pushd %t.dir
 //        RUN: clang-include-cleaner -p %{t:stem}.tmp.dir -edit ../%{t:stem}.tmp.cpp
 //        RUN: popd
